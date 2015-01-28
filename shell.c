@@ -37,8 +37,13 @@ void run(char* command) {
     args[i] = NULL;
 
     if (fork() == 0) {
-        if (execvp(args[0], args) == -1) perror("execv()");
-    } else wait(NULL);
+        if (execvp(args[0], args) == -1) {
+            perror("execv()");
+            exit(EXIT_FAILURE);
+        }
+    } else {
+        wait(NULL);
+    }
 
     free(args);
     linkedList_free(head);
@@ -57,7 +62,6 @@ int builtin(char *command) {
 
     } else {
         run(command);
-
         history_add(command);
         return 0;
     }
