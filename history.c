@@ -26,7 +26,7 @@ void history_init() {
 }
 
 void history_add(char *command) {
-    linkedList_add(list_history, command, strlen(command));
+    linkedList_add(list_history, command, strlen(command) + 1);
 }
 
 void history_dump() {
