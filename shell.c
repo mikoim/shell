@@ -36,13 +36,20 @@ void run(char* command) {
 
     args[i] = NULL;
 
-    if (fork() == 0) {
-        if (execvp(args[0], args) == -1) {
-            perror("execv()");
-            exit(EXIT_FAILURE);
-        }
+    if (strcmp(args[0], "cd") == 0) {
+        if (chdir(args[1]) == -1)
+            perror("chdir()");
+
     } else {
-        wait(NULL);
+        if (fork() == 0) {
+            if (execvp(args[0], args) == -1) {
+                perror("execv()");
+                exit(EXIT_FAILURE);
+            }
+
+        } else {
+            wait(NULL);
+        }
     }
 
     free(args);
