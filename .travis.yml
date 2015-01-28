@@ -1,7 +1,21 @@
 language: c
 
+env:
+  global:
+    - secure: "dZ0B0nxTLf93r82qatqRwJ8zvarm5crtq76c/r38VI1PfKf+u2oRXeYwxTq5wEN4SsPpBMkcgKqZqXSTsHvDNHHp0155qQ8RMv733BDEIGEOPCpbai6kkG+jeoL9c2Jt/Y7xzOdjyo8PLwEubQXpnWJEDnl0n9L2TYPamwkpQbc="
+
 compiler:
   - clang
   - gcc
 
-script: mkdir build && cd build && cmake .. && make
+script: cmake . && make clean && make
+
+addons:
+  coverity_scan:
+    project:
+      name: "mikoim/rogue"
+      description: "Build submitted via Travis CI"
+    notification_email: omochi@luna.miko.im
+    build_command_prepend: "cmake . && make clean"
+    build_command:   "make"
+    branch_pattern: master
