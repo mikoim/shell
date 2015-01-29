@@ -36,3 +36,8 @@
 * Fu**ing shell (untested dirty code)
 * Command history (type **history** command)
 * Tab completion (NOT implemented YET)
+
+## Built-in commands
+
+* cd (Change working directory)
+* history (Show command history)
